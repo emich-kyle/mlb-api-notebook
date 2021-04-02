@@ -22,14 +22,12 @@ players_list = statsapi.get('sports_players',{'season':2019,'gameType':'R'})['pe
 with open("test.json", "w") as write_file:
     json.dump(statsapi.player_stat_data(650556, group="[hitting]", type="yearByYear"), write_file)
 
-players_list = statsapi.get('sports_players',{'season':2019,'gameType':'R'})['people']
 hitting_list = []
 for player in players_list:
-    params = {
-            "personId": player['id'],
-            "hydrate": "stats(group= [hitting]", + ",type=" + type + "),currentTeam",
-        }
-    r = get("person", params)
+    r = statsapi.player_stat_data(player['id'], group="[hitting]", type="yearByYear")
     hitting_list.append(r)
 
-print(hitting_list)
+with open("new_hitting_list.json", "w") as write:
+    json.dump(hitting_list, write)
+
+
