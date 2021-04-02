@@ -1,3 +1,13 @@
+#in order to get more complete data, I have used the MLB-StatsAPI on a Jupyter notebook to make better player lists.
+#this is easier to do in Python. now, the true player positions are included in the .json files among other fields.
+#i will need to refactor the main class to have a Hitter class that extends Player and a Pitcher class that extends Player
+#and i will need to implement some external json library for Java in order to parse the relevant data into objects
+#because our data will no longer use .csv files; instead, it will use .json files
+#this python code can be run in an online Jupyter notebook for testing but that won't be necessary since
+#i have already extracted the data into .json files with it
+
+#kyle
+
 pip install MLB-StatsAPI
 
 import statsapi
@@ -40,7 +50,7 @@ with open("new_hitting_list.json", "w") as write:
 pitching_list = []
 for player in players_list:
     r = statsapi.player_stat_data(player['id'], group="[pitching]", type="yearByYear")
-    hitting_list.append(r)
+    pitching_list.append(r)
 
 with open("new_pitching_list.json", "w") as write:
     json.dump(pitching_list, write)
